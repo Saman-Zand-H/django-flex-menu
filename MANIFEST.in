@@ -1,0 +1,5 @@
+include flex_menu/templates/flex_menu/sidebar.html
+include flex_menu/templates/flex_menu/navbar.html
+include flex_menu/templates/flex_menu/htmx_link.html
+include flex_menu/templates/flex_menu/navigation_menu.html
+include flex_menu/templates/flex_menu/navigation_link.html

@@ -1,0 +1,39 @@
+{% load menu_tags %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        {% include 'components/styles.html' %}
+        <title>
+            {% block title %}Default Title{% endblock %}
+        </title>
+    </head>
+    <body>
+        <header class="navbar-expand-md">
+            <div class="collapse navbar-collapse">
+                <nav class="navbar">
+                    <div class="container-xl">
+                        <ul class="navbar-nav">
+                            {% for menu_item in menu.items.roots %}
+                                <li class="nav-item{% if menu_item.has_children %} dropdown{% endif %}">
+                                    <a {% if menu_item.has_children %} class="nav-link dropdown-toggle gap-2" href="#{{ menu_item.slug }}-children" data-bs-toggle="dropdown" data-bs-autoclose="outside" role="button" aria-expanded="true" {% else %} href="{{ menu_item.link }}" class="nav-link gap-2" {% endif %}>
+                                        <span class="nav-link-title">{{ menu_item.label|title }}</span>
+                                    </a>
+                                    {% if menu_item.has_children %}
+                                        <div class="dropdown-menu" data-bs-popper="static">
+                                            {% for child in menu_item.children.all %}
+                                                <a href="https://google.com" class="dropdown-item">{{ child.label }}</a>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </header>
+        {% include 'components/scripts.html' %}
+    </body>
+</html>

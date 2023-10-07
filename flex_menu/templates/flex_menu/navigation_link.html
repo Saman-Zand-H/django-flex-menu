@@ -1,0 +1,17 @@
+{% load load_menu %}
+{% if is_menuitem %}
+    <a class="dropdown-item cursor-pointer{% if navigation_is_active %} active{% endif %}" href="{{ navigation_link }}" {% if navigation_extras %}hx-get="{{ navigation_link }}" {{ navigation_extras|safe }}{% endif %} {% if navigation_no_reload %}{{ template_settings.a_navigation_htmx }}{% endif %}>
+        {{ navigation_title }}
+    </a>
+{% else %}
+    <li class="nav-item{% if navigation_is_active %} active{% endif %}">
+        {% htmx_link with href=navigation_link extra=navigation_extras no_reload=navigation_no_reload %}
+            {% if navigation_icon %}
+                <span class="nav-link-icon d-md-none d-lg-inline-block">
+                    <i class="material-icons-outlined">{{ navigation_icon }}</i>
+                </span>
+            {% endif %}
+            <span class="nav-link-title">{{ navigation_title }}</span>
+        {% endhtmx_link %}
+    </li>
+{% endif %}

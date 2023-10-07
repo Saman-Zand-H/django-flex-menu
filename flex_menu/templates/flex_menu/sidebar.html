@@ -1,0 +1,45 @@
+{% load waffle_tags load_menu %}
+<aside class="navbar navbar-vertical navbar-expand-lg" id="navigation-bar">
+    <div class="container-fluid">
+        <button class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#{{ menu.slug }}"
+                aria-controls="{{ menu.slug }}"
+                aria-expanded="{{ menu_active|yesno:'true,false' }}"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <h1 class="navbar-brand navbar-brand-autodark">
+            {% htmx_link with href="" extra=menu.parsed_attributes extra_classes=menu.attributes.class %}
+                <i class="material-icons-outlined navbar-brand-image mt-2"
+                   style="font-size: 45px!important">
+                    {{ menu.icon }}
+                </i>
+            {% endhtmx_link %}
+        </h1>
+        <div class="collapse navbar-collapse" id="{{ menu.slug }}">
+            <ul class="navbar-nav pt-lg-3 px-2">
+                {% if menu %}
+                    {% for item in menu.items.roots %}
+                        {% flag item.slug %}
+                            {% if item.has_children %}
+                                {% navigation_menu with menu_slug=item.slug menu_name=item.label menu_url=item.link menu_icon=item.icon extra=item.extras %}
+                                    {% for sub_item in item.children.all %}
+                                        {% flag sub_item.slug %}
+                                            {% navigation_link item=sub_item %}
+                                        {% endflag %}
+                                    {% endfor %}
+                                {% endnavigation_menu %}
+                            {% else %}
+                                {% flag item.slug %}
+                                    {% navigation_link item=item %}
+                                {% endflag %}
+                            {% endif %}
+                        {% endflag %}
+                    {% endfor %}
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</aside>

@@ -1,0 +1,13 @@
+<li class="nav-item{% if menu_active %} active{% endif %} dropdown">
+    <a class="nav-link dropdown-toggle" href="#{{ menu_slug }}" data-bs-toggle="dropdown" data-bs-auto-close="false" role="button" aria-expanded="{{ menu_active|yesno:'true,false' }}" {% if extra %}{{ extra|safe }}{% endif %}>
+        <span class="nav-link-icon d-md-none d-lg-inline-block">
+            <i class="material-icons-outlined">{{ menu_icon }}</i>
+        </span>
+        <span class="nav-link-title">{{ menu_name }}</span>
+    </a>
+    <div class="dropdown-menu{% if menu_active %} show{% endif %}">
+        <div class="dropdown-menu-columns">
+            <div class="dropdown-menu-column active">{{ menu_items }}</div>
+        </div>
+    </div>
+</li>
