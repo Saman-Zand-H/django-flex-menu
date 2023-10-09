@@ -9,7 +9,7 @@ from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
 from mptt.models import MPTTModel, TreeForeignKey
 
-from . import default_settings as app_settings
+from .default_settings import app_settings
 from .enums import MenuTypes
 from .managers import MenuItemManager
 
