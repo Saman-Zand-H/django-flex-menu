@@ -9,6 +9,10 @@ class AppSettings:
     @property
     def LANGUAGES(self):
         return self.settings.setdefault("LANGUAGES", [("en", "English"), ("fa", "Farsi")])
+    
+    @property
+    def MAX_LEVEL(self):
+        return self.settings.setdefault("MAX_LEVEL", 2)
 
     @property
     def TEMPLATE_SETTINGS(self):

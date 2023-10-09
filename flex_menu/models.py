@@ -51,6 +51,7 @@ class Menu(AbstractLocalized):
 
 
 class MenuItem(MPTTModel, AbstractLocalized):
+    MAX_LEVEL = app_settings.MAX_LEVEL
     label = models.CharField(
         _("label"), max_length=50, help_text=_("Display name on the website.")
     )
@@ -123,7 +124,7 @@ class MenuItem(MPTTModel, AbstractLocalized):
 
     def clean(self):
         super().clean()
-        if getattr(self.parent, "level", 0) > 0:
+        if getattr(self.parent, "level", 0) > self.MAX_LEVEL - 2:
             raise ValidationError("Further nested menu is not supported.")
 
     @cached_property
