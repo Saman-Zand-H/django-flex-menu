@@ -43,8 +43,7 @@ exclude = ["conf*"]
 
 [tool.setuptools.dynamic]
 version = {attr = "flex_menu.__version__"}
-dependencies = {file: ["requirements.txt"]}
-dependencies = ["django>=3.2", "django-mptt>=0.14.0", "django-waffle>=4.0.0"]
+dependencies = {file = ["requirements.txt"]}
 
 [tool.mypy]
 python_version = "3.8"
