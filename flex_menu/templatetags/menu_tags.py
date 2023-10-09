@@ -82,7 +82,7 @@ class HtmxLinkNode(template.Node):
         self.extra_context = extra_context
 
     def render(self, context):
-        base_template = get_template("flex_menu/htmx_link.html")
+        base_template = get_template("flex_menu/link.html")
         items = self.nodeslist.render(context)
         resolved_context = {
             name: var.resolve(context) for name, var in self.extra_context.items()
@@ -92,7 +92,7 @@ class HtmxLinkNode(template.Node):
 
 
 @register.tag
-def htmx_link(parser, token):
+def link(parser, token):
     bits = token.split_contents()
     if len(bits) < 3:
         raise template.TemplateSyntaxError(
@@ -115,7 +115,7 @@ def htmx_link(parser, token):
     if "href" not in namemap:
         raise template.TemplateSyntaxError("href is a required argument.")
 
-    nodelist = parser.parse(("endhtmx_link",))
+    nodelist = parser.parse(("endlink",))
     parser.delete_first_token()
 
     return HtmxLinkNode(nodeslist=nodelist, extra_context=namemap)
@@ -124,7 +124,7 @@ def htmx_link(parser, token):
 @register.inclusion_tag("flex_menu/navigation_link.html", takes_context=True)
 def navigation_link(context, *, item):
     if not isinstance(item, MenuItem):
-        raise ValueError("item must be a MenuItem instance.")
+        raise ValueError(f"item must be a MenuItem instance {type(item)}.")
 
     context.update(
         {

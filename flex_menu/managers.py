@@ -6,4 +6,4 @@ class MenuItemManager(TreeManager):
         return super().get_queryset(*args, **kwargs).filter(enabled=True)
 
     def roots(self, *args, **kwargs):
-        return self.filter(parent__isnull=True)
+        return self.filter(level=0)

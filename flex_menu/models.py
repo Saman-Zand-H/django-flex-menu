@@ -65,7 +65,7 @@ class MenuItem(MPTTModel, AbstractLocalized):
     )
     parent = TreeForeignKey(
         "self",
-        limit_choices_to={"parent": None},
+        limit_choices_to={"level": 0},
         verbose_name=_("parent"),
         on_delete=models.CASCADE,
         null=True,
@@ -125,9 +125,6 @@ class MenuItem(MPTTModel, AbstractLocalized):
         super().clean()
         if getattr(self.parent, "level", 0) > 0:
             raise ValidationError("Further nested menu is not supported.")
-
-    def is_active(self, path):
-        return self.link and self.link == path
 
     @cached_property
     def has_children(self):
