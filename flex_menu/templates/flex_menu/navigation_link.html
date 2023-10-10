@@ -7,9 +7,9 @@
 {% else %}
     <li class="nav-item{% if navigation_is_active %} active{% endif %}">
         {% link with href=navigation_link extra=navigation_extras no_reload=navigation_no_reload %}
-            {% if navigation_icon %}
+            {% if icon %}
                 <span class="nav-link-icon d-md-none d-lg-inline-block">
-                    <i class="material-icons-outlined">{{ navigation_icon }}</i>
+                    {% include 'flex_menu/icon.html' %}
                 </span>
             {% endif %}
             <span class="nav-link-title">{{ navigation_title }}</span>

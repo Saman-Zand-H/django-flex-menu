@@ -129,7 +129,7 @@ def navigation_link(context, *, item):
     context.update(
         {
             "navigation_title": item.label,
-            "navigation_icon": item.icon,
+            "icon": item.icon,
             "navigation_link": reverse(item.link),
             "navigation_extras": item.extras,
             "navigation_no_reload": item.no_reload,
