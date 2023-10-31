@@ -124,7 +124,7 @@ class MenuItem(MPTTModel, AbstractLocalized):
 
     def clean(self):
         super().clean()
-        if getattr(self.parent, "level", 0) > self.MAX_LEVEL - 2:
+        if self.level > self.MAX_LEVEL - 1:
             raise ValidationError("Further nested menu is not supported.")
 
     @cached_property

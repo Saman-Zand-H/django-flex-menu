@@ -1,2 +1,4 @@
-__version__ = "0.1.3"
-default_app_config = "flex_menu.apps.FlexMenuConfig"
+import versioneer
+
+print(versioneer.get_version())
+__version__ = versioneer.get_version()

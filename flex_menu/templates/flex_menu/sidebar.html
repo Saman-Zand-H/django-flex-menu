@@ -24,17 +24,13 @@
                 {% if menu %}
                     {% recursetree menu.items.roots %}
                         {% if not node.is_leaf_node %}
-
                             {% navigation_menu with menu_slug=node.slug menu_name=node.label menu_url=node.link icon=node.icon extra=node.extras %}
                                 {% for sub_item in node.children.all %}
                                     {% navigation_link item=sub_item %}
                                 {% endfor %}
                             {% endnavigation_menu %}
-
                         {% else %}
-
                             {% navigation_link item=node %}
-
                         {% endif %}
                     {% endrecursetree %}
                 {% endif %}

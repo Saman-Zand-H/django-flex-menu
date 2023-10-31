@@ -31,6 +31,14 @@ classifiers = [
 ]
 requires-python = ">=3.8"
 
+[tool.versioneer]
+VCS = "git"
+style = "pep440"
+versionfile_source = "flex_menu/__init__.py"
+versionfile_build = "flex_menu/__init__.py"
+tag_prefix = ""
+parentdir_prefix = "myproject-"
+
 [project.urls]
 Homepage = "http://github.com/saman-zand-h/django-flex-menu"
 
