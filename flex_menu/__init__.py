@@ -1,2 +1,3 @@
-__version__ = "0.1.3"
-default_app_config = "flex_menu.apps.FlexMenuConfig"
+from ._version import get_version
+
+__version__ = get_version()
