@@ -3,7 +3,7 @@ import logging
 from django import template
 from django.template.base import token_kwargs
 from django.template.loader import get_template
-from django.urls import reverse
+from django.urls import NoReverseMatch, reverse
 
 from ..enums import MenuTypes
 from ..models import Menu, MenuItem
@@ -130,7 +130,7 @@ def navigation_link(context, *, item):
         {
             "navigation_title": item.label,
             "icon": item.icon,
-            "navigation_link": reverse(item.link),
+            "navigation_link": get_reverse(item.link),
             "navigation_extras": item.extras,
             "navigation_no_reload": item.no_reload,
             "navigation_is_active": context.request.resolver_match.view_name
@@ -159,3 +159,10 @@ def load_sidebar(context, menu_slug: str):
         return context
 
     return context.update({"menu": Menu.objects.none()})
+
+
+def get_reverse(url):
+    try:
+        return reverse(url)
+    except NoReverseMatch:
+        return url

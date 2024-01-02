@@ -1,4 +1,3 @@
-import versioneer
+from ._version import get_version
 
-print(versioneer.get_version())
-__version__ = versioneer.get_version()
+__version__ = get_version()
