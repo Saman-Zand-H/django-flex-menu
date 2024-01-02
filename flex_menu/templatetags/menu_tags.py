@@ -7,6 +7,7 @@ from django.urls import reverse
 
 from ..enums import MenuTypes
 from ..models import Menu, MenuItem
+from ..queries import get_menu_items
 
 register = template.Library()
 logger = logging.getLogger(__name__)
@@ -144,7 +145,7 @@ def navigation_link(context, *, item):
 @register.inclusion_tag("flex_menu/menu.html", takes_context=True)
 def load_navbar(context, menu_slug: str):
     if (menu_qs := Menu.objects.filter(slug=menu_slug, type=MenuTypes.NAVBAR)).exists():
-        context.update({"menu": menu_qs.first()})
+        context.update({"menu": menu_qs.first(), "items": get_menu_items(menu_qs.first())})
         return context
 
     raise ValueError(f"Menu with slug {menu_slug} does not exist.")
@@ -155,7 +156,7 @@ def load_sidebar(context, menu_slug: str):
     if (
         menu_qs := Menu.objects.filter(slug=menu_slug, type=MenuTypes.SIDEBAR)
     ).exists():
-        context.update({"menu": menu_qs.first()})
+        context.update({"menu": menu_qs.first(), "items": get_menu_items(menu_qs.first())})
         return context
 
     return context.update({"menu": Menu.objects.none()})

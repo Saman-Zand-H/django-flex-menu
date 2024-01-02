@@ -13,6 +13,14 @@ class AppSettings:
     @property
     def MAX_LEVEL(self):
         return self.settings.setdefault("MAX_LEVEL", 2)
+    
+    @property
+    def MENU_ITEMS_CACHE_KEY(self):
+        return self.settings.setdefault("ITEMS_CACHE_KEY", "menu_items")
+
+    @property
+    def MENU_ITEMS_CACHE_TIMEOUT(self):
+        return self.settings.setdefault("ITEMS_CACHE_TIMEOUT", 60 * 60 * 24)
 
     @property
     def TEMPLATE_SETTINGS(self):
